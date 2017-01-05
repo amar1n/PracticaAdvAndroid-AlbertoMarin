@@ -2,6 +2,7 @@ package io.keepcoding.madridguide.navigator;
 
 import android.content.Intent;
 
+import io.keepcoding.madridguide.activities.ActivitiesActivity;
 import io.keepcoding.madridguide.activities.MainActivity;
 import io.keepcoding.madridguide.activities.ShopDetailActivity;
 import io.keepcoding.madridguide.activities.ShopsActivity;
@@ -25,4 +26,9 @@ public class Navigator {
         return i;
     }
 
+    public static Intent navigateFromMainActivityToActivitiesActivity(MainActivity mainActivity) {
+        Intent i = new Intent(mainActivity, ActivitiesActivity.class);
+        mainActivity.startActivity(i);
+        return i;
+    }
 }

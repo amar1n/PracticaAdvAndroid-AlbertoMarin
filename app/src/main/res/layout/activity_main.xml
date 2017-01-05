@@ -12,10 +12,19 @@
 
     <Button
         android:id="@+id/button_activity_main_open_shops"
-        android:layout_width="@dimen/activity_main_button_shops_width"
-        android:layout_height="@dimen/activity_main_button_shops_height"
+        android:layout_width="@dimen/activity_main_button_width"
+        android:layout_height="@dimen/activity_main_button_height"
         android:text="@string/activity_main_button_shops_text"
         android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:id="@+id/button_activity_main_open_activities"
+        android:layout_width="@dimen/activity_main_button_width"
+        android:layout_height="@dimen/activity_main_button_height"
+        android:text="@string/activities"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/button_activity_main_open_shops"
         />
 
 </RelativeLayout>

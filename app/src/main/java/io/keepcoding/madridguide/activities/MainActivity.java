@@ -15,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.button_activity_main_open_shops)
     Button openShopsButton;
 
+    @BindView(R.id.button_activity_main_open_activities)
+    Button openActivitiesButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Navigator.navigateFromMainActivityToShopsActivity(MainActivity.this);
+            }
+        });
+
+        this.openActivitiesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigator.navigateFromMainActivityToActivitiesActivity(MainActivity.this);
             }
         });
     }
