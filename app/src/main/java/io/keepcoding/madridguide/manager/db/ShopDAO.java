@@ -14,7 +14,7 @@ import java.util.List;
 import io.keepcoding.madridguide.model.Shop;
 import io.keepcoding.madridguide.model.Shops;
 
-import static io.keepcoding.madridguide.manager.db.DBConstants.ALL_COLUMNS;
+import static io.keepcoding.madridguide.manager.db.DBConstants.ALL_SHOP_COLUMNS;
 import static io.keepcoding.madridguide.manager.db.DBConstants.KEY_SHOP_ADDRESS;
 import static io.keepcoding.madridguide.manager.db.DBConstants.KEY_SHOP_DESCRIPTION;
 import static io.keepcoding.madridguide.manager.db.DBConstants.KEY_SHOP_ID;
@@ -123,7 +123,7 @@ public class ShopDAO implements DAOPersistable<Shop> {
     @Nullable
     @Override
     public Cursor queryCursor() {
-        Cursor c = db.query(TABLE_SHOP, ALL_COLUMNS, null, null, null, null, KEY_SHOP_ID);
+        Cursor c = db.query(TABLE_SHOP, ALL_SHOP_COLUMNS, null, null, null, null, KEY_SHOP_ID);
         if (c != null && c.getCount() > 0) {
             c.moveToFirst();
         }
@@ -132,7 +132,7 @@ public class ShopDAO implements DAOPersistable<Shop> {
 
     @Override
     public @Nullable Shop query(final long id) {
-        Cursor c = db.query(TABLE_SHOP, ALL_COLUMNS, KEY_SHOP_ID + " = " + id, null, null, null, KEY_SHOP_ID);
+        Cursor c = db.query(TABLE_SHOP, ALL_SHOP_COLUMNS, KEY_SHOP_ID + " = " + id, null, null, null, KEY_SHOP_ID);
 
         if (c != null && c.getCount() == 1) {
             c.moveToFirst();
@@ -182,7 +182,7 @@ public class ShopDAO implements DAOPersistable<Shop> {
     }
 
     public Cursor queryCursor(long id) {
-        Cursor c = db.query(TABLE_SHOP, ALL_COLUMNS, "ID = " + id, null, null, null, KEY_SHOP_ID);
+        Cursor c = db.query(TABLE_SHOP, ALL_SHOP_COLUMNS, "ID = " + id, null, null, null, KEY_SHOP_ID);
         if (c != null && c.getCount() > 0) {
             c.moveToFirst();
         }

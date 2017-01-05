@@ -57,7 +57,7 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader loader = new CursorLoader(this,
                 MadridGuideProvider.SHOPS_URI,
-                DBConstants.ALL_COLUMNS,            // projection
+                DBConstants.ALL_SHOP_COLUMNS,            // projection
                 null,                               // where
                 null,                               // campos del where
                 null                                // order

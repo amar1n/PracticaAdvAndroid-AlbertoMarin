@@ -6,11 +6,16 @@ import android.support.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Shops implements IShopsIterate, IShopsUpdate {
+public class Shops implements IItemsIterate<Shop>, IItemsUpdate<Shop> {
 
     private List<Shop> shops;
 
-    public static @NonNull Shops build(@NonNull List<Shop> shopList) {
+    private Shops() {
+    }
+
+    public static
+    @NonNull
+    Shops build(@NonNull List<Shop> shopList) {
         Shops shops = new Shops();
 
         if (shopList == null) {
@@ -22,24 +27,25 @@ public class Shops implements IShopsIterate, IShopsUpdate {
         return shops;
     }
 
-    private Shops() {
-    }
-
     @Override
     public long size() {
         return shops.size();
     }
 
     @Override
-    public @Nullable Shop get(long index) {
+    public
+    @Nullable
+    Shop get(long index) {
         if (index > size()) {
             return null;
         }
-        return shops.get((int)index);
+        return shops.get((int) index);
     }
 
     @Override
-    public @NonNull  List<Shop> allShops() {
+    public
+    @NonNull
+    List<Shop> allItems() {
         return this.shops;
     }
 
