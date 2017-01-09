@@ -8,7 +8,7 @@
     >
 
     <TextView
-        android:id="@+id/row_activity_name"
+        android:id="@+id/row_madridactivity_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
@@ -17,7 +17,7 @@
         />
 
     <ImageView
-        android:id="@+id/row_activity_logo"
+        android:id="@+id/row_madridactivity_logo"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerVertical="true"

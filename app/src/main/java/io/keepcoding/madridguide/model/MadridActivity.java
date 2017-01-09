@@ -2,7 +2,7 @@ package io.keepcoding.madridguide.model;
 
 import java.io.Serializable;
 
-public class Activity implements Serializable {
+public class MadridActivity implements Serializable {
     private long id;
     private String name;
     private String imageUrl;
@@ -13,19 +13,19 @@ public class Activity implements Serializable {
     private float latitude;
     private float longitude;
 
-    public Activity(long id, String name) {
+    public MadridActivity(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    private Activity() {
+    private MadridActivity() {
     }
 
     public long getId() {
         return id;
     }
 
-    public Activity setId(long id) {
+    public MadridActivity setId(long id) {
         this.id = id;
         return this;
     }
@@ -34,7 +34,7 @@ public class Activity implements Serializable {
         return name;
     }
 
-    public Activity setName(String name) {
+    public MadridActivity setName(String name) {
         this.name = name;
         return this;
     }
@@ -43,7 +43,7 @@ public class Activity implements Serializable {
         return imageUrl;
     }
 
-    public Activity setImageUrl(String imageUrl) {
+    public MadridActivity setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }
@@ -52,7 +52,7 @@ public class Activity implements Serializable {
         return logoImgUrl;
     }
 
-    public Activity setLogoImgUrl(String logoImgUrl) {
+    public MadridActivity setLogoImgUrl(String logoImgUrl) {
         this.logoImgUrl = logoImgUrl;
         return this;
     }
@@ -61,7 +61,7 @@ public class Activity implements Serializable {
         return address;
     }
 
-    public Activity setAddress(String address) {
+    public MadridActivity setAddress(String address) {
         this.address = address;
         return this;
     }
@@ -70,7 +70,7 @@ public class Activity implements Serializable {
         return url;
     }
 
-    public Activity setUrl(String url) {
+    public MadridActivity setUrl(String url) {
         this.url = url;
         return this;
     }
@@ -79,7 +79,7 @@ public class Activity implements Serializable {
         return description;
     }
 
-    public Activity setDescription(String description) {
+    public MadridActivity setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -88,7 +88,7 @@ public class Activity implements Serializable {
         return latitude;
     }
 
-    public Activity setLatitude(float latitude) {
+    public MadridActivity setLatitude(float latitude) {
         this.latitude = latitude;
         return this;
     }
@@ -97,7 +97,7 @@ public class Activity implements Serializable {
         return longitude;
     }
 
-    public Activity setLongitude(float longitude) {
+    public MadridActivity setLongitude(float longitude) {
         this.longitude = longitude;
         return this;
     }

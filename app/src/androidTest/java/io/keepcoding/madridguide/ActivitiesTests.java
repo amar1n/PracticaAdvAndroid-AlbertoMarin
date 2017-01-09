@@ -6,21 +6,21 @@ import android.test.AndroidTestCase;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.keepcoding.madridguide.model.Activities;
-import io.keepcoding.madridguide.model.Activity;
+import io.keepcoding.madridguide.model.MadridActivities;
+import io.keepcoding.madridguide.model.MadridActivity;
 
 
 public class ActivitiesTests extends AndroidTestCase {
-    public void testCreatingAnActivitiesWithNullListReturnsNonNullActivities() {
-        Activities sut = Activities.build(null);
+    public void testCreatingAMadridActivitiesWithNullListReturnsNonNullMadridActivities() {
+        MadridActivities sut = MadridActivities.build(null);
         assertNotNull(sut);
         assertNotNull(sut.allItems());
     }
 
-    public void testCreatingAnActivitiesWithAListReturnsNonNullActivities() {
-        List<Activity> data = getActivities();
+    public void testCreatingAMadridActivitiesWithAListReturnsNonNullMadridActivities() {
+        List<MadridActivity> data = getMadridActivities();
 
-        Activities sut = Activities.build(data);
+        MadridActivities sut = MadridActivities.build(data);
         assertNotNull(sut);
         assertNotNull(sut.allItems());
         assertEquals(sut.allItems(), data);
@@ -28,10 +28,10 @@ public class ActivitiesTests extends AndroidTestCase {
     }
 
     @NonNull
-    private List<Activity> getActivities() {
-        List<Activity> data = new ArrayList<>();
-        data.add(new Activity(1, "1").setAddress("AD 1"));
-        data.add(new Activity(2, "2").setAddress("AD 2"));
+    private List<MadridActivity> getMadridActivities() {
+        List<MadridActivity> data = new ArrayList<>();
+        data.add(new MadridActivity(1, "1").setAddress("AD 1"));
+        data.add(new MadridActivity(2, "2").setAddress("AD 2"));
         return data;
     }
 

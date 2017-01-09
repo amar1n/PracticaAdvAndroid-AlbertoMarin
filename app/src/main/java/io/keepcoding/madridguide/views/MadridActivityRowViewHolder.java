@@ -12,28 +12,28 @@ import com.squareup.picasso.Picasso;
 import java.lang.ref.WeakReference;
 
 import io.keepcoding.madridguide.R;
-import io.keepcoding.madridguide.model.Activity;
+import io.keepcoding.madridguide.model.MadridActivity;
 
-public class ActivityRowViewHolder extends RecyclerView.ViewHolder {
+public class MadridActivityRowViewHolder extends RecyclerView.ViewHolder {
     TextView nameTextView;
     ImageView logoImageView;
     WeakReference<Context> context;
 
-    public ActivityRowViewHolder(View rowNote) {
+    public MadridActivityRowViewHolder(View rowNote) {
         super(rowNote);
 
         context = new WeakReference<>(rowNote.getContext());
-        nameTextView = (TextView) rowNote.findViewById(R.id.row_activity_name);
-        logoImageView = (ImageView) rowNote.findViewById(R.id.row_activity_logo);
+        nameTextView = (TextView) rowNote.findViewById(R.id.row_madridactivity_name);
+        logoImageView = (ImageView) rowNote.findViewById(R.id.row_madridactivity_logo);
     }
 
-    public void setActivity(@Nullable Activity activity) {
-        if (activity == null) {
+    public void setMadridActivity(@Nullable MadridActivity madridActivity) {
+        if (madridActivity == null) {
             return;
         }
-        this.nameTextView.setText(activity.getName());
+        this.nameTextView.setText(madridActivity.getName());
         Picasso.with(context.get())
-                .load(activity.getLogoImgUrl())
+                .load(madridActivity.getLogoImgUrl())
                 //.networkPolicy(NetworkPolicy.OFFLINE)
                 .placeholder(android.R.drawable.ic_btn_speak_now)
                 .into(logoImageView);

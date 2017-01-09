@@ -19,10 +19,10 @@
         />
 
     <Button
-        android:id="@+id/button_activity_main_open_activities"
+        android:id="@+id/button_activity_main_open_madridactivities"
         android:layout_width="@dimen/activity_main_button_width"
         android:layout_height="@dimen/activity_main_button_height"
-        android:text="@string/activities"
+        android:text="@string/madridActivities"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/button_activity_main_open_shops"
         />

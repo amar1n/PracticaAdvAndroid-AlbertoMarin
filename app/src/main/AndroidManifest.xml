@@ -56,8 +56,8 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
 
-        <activity android:name=".activities.ActivitiesActivity">
-        </activity>
+        <activity android:name=".activities.MadridActivitiesActivity"/>
+        <activity android:name=".activities.MadridActivityDetailActivity"/>
     </application>
 
 </manifest>

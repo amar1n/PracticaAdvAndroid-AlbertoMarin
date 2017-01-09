@@ -5,29 +5,29 @@ import android.test.AndroidTestCase;
 
 import java.util.List;
 
-import io.keepcoding.madridguide.manager.db.ActivityDAO;
-import io.keepcoding.madridguide.model.Activity;
+import io.keepcoding.madridguide.manager.db.MadridActivityDAO;
+import io.keepcoding.madridguide.model.MadridActivity;
 
 
 public class ActivityDAOTests extends AndroidTestCase {
-    public static final String ACTIVITY_TESTING_NAME = "Activity testing name";
+    public static final String MADRIDACTIVITY_TESTING_NAME = "MadridActivity testing name";
     public static final String ADDRESS_TESTING = "Address testing";
 
-    public void testCanInsertANewActivity() {
-        final ActivityDAO sut = new ActivityDAO(getContext());
+    public void testCanInsertANewMadridActivity() {
+        final MadridActivityDAO sut = new MadridActivityDAO(getContext());
 
         final int count = getCount(sut);
 
-        final long id = insertTestActivity(sut);
+        final long id = insertTestMadridActivity(sut);
 
         assertTrue(id > 0);
         assertTrue(count + 1 == sut.queryCursor().getCount());
     }
 
-    public void testCanDeleteAnActivity() {
-        final ActivityDAO sut = new ActivityDAO(getContext());
+    public void testCanDeleteAMadridActivity() {
+        final MadridActivityDAO sut = new MadridActivityDAO(getContext());
 
-        final long id = insertTestActivity(sut);
+        final long id = insertTestMadridActivity(sut);
 
         final int count = getCount(sut);
 
@@ -37,7 +37,7 @@ public class ActivityDAOTests extends AndroidTestCase {
     }
 
     public void testDeleteAll() {
-        final ActivityDAO sut = new ActivityDAO(getContext());
+        final MadridActivityDAO sut = new MadridActivityDAO(getContext());
 
         sut.deleteAll();
 
@@ -45,40 +45,40 @@ public class ActivityDAOTests extends AndroidTestCase {
         assertEquals(0, count);
     }
 
-    public void testQueryOneActivity() {
-        final ActivityDAO dao = new ActivityDAO(getContext());
+    public void testQueryOneMadridActivity() {
+        final MadridActivityDAO dao = new MadridActivityDAO(getContext());
 
-        final long id = insertTestActivity(dao);
+        final long id = insertTestMadridActivity(dao);
 
-        Activity sut = dao.query(id);
+        MadridActivity sut = dao.query(id);
         assertNotNull(sut);
-        assertEquals(sut.getName(), ACTIVITY_TESTING_NAME);
+        assertEquals(sut.getName(), MADRIDACTIVITY_TESTING_NAME);
     }
 
-    public void testQueryAllActivities() {
-        final ActivityDAO dao = new ActivityDAO(getContext());
+    public void testQueryAllMadridActivities() {
+        final MadridActivityDAO dao = new MadridActivityDAO(getContext());
 
-        final long id = insertTestActivity(dao);
+        final long id = insertTestMadridActivity(dao);
 
-        List<Activity> activityList = dao.query();
-        assertNotNull(activityList);
-        assertTrue(activityList.size() > 0);
+        List<MadridActivity> madridActivityList = dao.query();
+        assertNotNull(madridActivityList);
+        assertTrue(madridActivityList.size() > 0);
 
-        for (Activity activity : activityList) {
-            assertTrue(activity.getName().length() > 0);
+        for (MadridActivity madridActivity : madridActivityList) {
+            assertTrue(madridActivity.getName().length() > 0);
         }
     }
 
 
 
-    private int getCount(ActivityDAO sut) {
+    private int getCount(MadridActivityDAO sut) {
         final Cursor cursor = sut.queryCursor();
         return cursor.getCount();
     }
 
-    private long insertTestActivity(ActivityDAO sut) {
-        final Activity activity = new Activity(1, ACTIVITY_TESTING_NAME).setAddress(ADDRESS_TESTING);
-        return sut.insert(activity);
+    private long insertTestMadridActivity(MadridActivityDAO sut) {
+        final MadridActivity madridActivity = new MadridActivity(1, MADRIDACTIVITY_TESTING_NAME).setAddress(ADDRESS_TESTING);
+        return sut.insert(madridActivity);
     }
 
 }

@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.button_activity_main_open_shops)
     Button openShopsButton;
 
-    @BindView(R.id.button_activity_main_open_activities)
-    Button openActivitiesButton;
+    @BindView(R.id.button_activity_main_open_madridactivities)
+    Button openMadridActivitiesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        this.openActivitiesButton.setOnClickListener(new View.OnClickListener() {
+        this.openMadridActivitiesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigator.navigateFromMainActivityToActivitiesActivity(MainActivity.this);
+                Navigator.navigateFromMainActivityToMadridActivitiesActivity(MainActivity.this);
             }
         });
     }

@@ -2,27 +2,27 @@ package io.keepcoding.madridguide;
 
 import android.test.AndroidTestCase;
 
-import io.keepcoding.madridguide.model.Activity;
+import io.keepcoding.madridguide.model.MadridActivity;
 
 
 public class ActivityTests extends AndroidTestCase {
 
-    public static final String ACTIVITY = "activity";
+    public static final String MADRIDACTIVITY = "madridActivity";
     public static final String ADDRESS = "ADDRESS";
 
     public void testCanCreateAnActivity() {
-        Activity sut = new Activity(0, ACTIVITY);
+        MadridActivity sut = new MadridActivity(0, MADRIDACTIVITY);
         assertNotNull(sut);
     }
 
-    public void testANewActivityStoresDataCorrectly() {
-        Activity sut = new Activity(10, ACTIVITY);
+    public void testANewMAdridActivityStoresDataCorrectly() {
+        MadridActivity sut = new MadridActivity(10, MADRIDACTIVITY);
         assertEquals(10, sut.getId());
-        assertEquals(ACTIVITY, sut.getName());
+        assertEquals(MADRIDACTIVITY, sut.getName());
     }
 
-    public void testANewActivityStoresDataInPropertiesCorrectly() {
-        Activity sut = new Activity(11, ACTIVITY)
+    public void testANewMadridActivityStoresDataInPropertiesCorrectly() {
+        MadridActivity sut = new MadridActivity(11, MADRIDACTIVITY)
                     .setAddress(ADDRESS)
                     .setDescription("DESC")
                     .setImageUrl("URL");
