@@ -5,5 +5,5 @@ package io.keepcoding.madridguide.util;
 import android.support.annotation.NonNull;
 
 public interface OnElementClick<T> {
-    public void clickedOn(@NonNull T element, int position);
+    void clickedOn(@NonNull T element, int position);
 }

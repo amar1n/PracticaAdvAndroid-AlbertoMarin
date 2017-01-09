@@ -9,7 +9,7 @@ import io.keepcoding.madridguide.model.Shops;
 
 public class CacheAllShopsInteractor {
     public interface CacheAllShopsInteractorResponse {
-        public void response(boolean success);
+        void response(boolean success);
     }
 
     public void execute(final Context context, final Shops shops, final CacheAllShopsInteractorResponse response) {

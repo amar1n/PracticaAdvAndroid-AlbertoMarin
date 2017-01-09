@@ -11,7 +11,7 @@ import io.keepcoding.madridguide.util.MainThread;
 
 public class GetAllShopsFromLocalCacheInteractor {
 
-    public interface  OnGetAllShopsFromLocalCacheInteractorCompletion {
+    public interface OnGetAllShopsFromLocalCacheInteractorCompletion {
         public void completion(Shops shops);
     }
 

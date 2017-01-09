@@ -19,7 +19,7 @@ public class MadridGuideApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        MadridGuideApp.appContext = new WeakReference<Context>(getApplicationContext());
+        MadridGuideApp.appContext = new WeakReference<>(getApplicationContext());
 
         new GetAllShopsInteractor().execute(getApplicationContext(),
                 new GetAllShopsInteractorResponse() {

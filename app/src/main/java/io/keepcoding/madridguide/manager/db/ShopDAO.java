@@ -32,7 +32,7 @@ public class ShopDAO implements DAOPersistable<Shop> {
     private SQLiteDatabase db;
 
     public ShopDAO(Context context, DBHelper dbHelper) {
-        this.context = new WeakReference<Context>(context);
+        this.context = new WeakReference<>(context);
         this.dbHelper = dbHelper;
         this.db = dbHelper.getDB();
     }
