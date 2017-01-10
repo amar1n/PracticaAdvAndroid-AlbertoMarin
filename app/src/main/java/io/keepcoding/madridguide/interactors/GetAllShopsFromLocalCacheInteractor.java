@@ -12,7 +12,7 @@ import io.keepcoding.madridguide.util.MainThread;
 public class GetAllShopsFromLocalCacheInteractor {
 
     public interface OnGetAllShopsFromLocalCacheInteractorCompletion {
-        public void completion(Shops shops);
+        void completion(Shops shops);
     }
 
     public void execute(final Context context, final OnGetAllShopsFromLocalCacheInteractorCompletion completion) {

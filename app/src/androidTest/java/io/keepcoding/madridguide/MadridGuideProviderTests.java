@@ -6,8 +6,10 @@ import android.net.Uri;
 import android.test.AndroidTestCase;
 
 import io.keepcoding.madridguide.manager.db.DBConstants;
+import io.keepcoding.madridguide.manager.db.MadridActivityDAO;
 import io.keepcoding.madridguide.manager.db.ShopDAO;
 import io.keepcoding.madridguide.manager.db.provider.MadridGuideProvider;
+import io.keepcoding.madridguide.model.MadridActivity;
 import io.keepcoding.madridguide.model.Shop;
 
 public class MadridGuideProviderTests extends AndroidTestCase {
@@ -34,5 +36,27 @@ public class MadridGuideProviderTests extends AndroidTestCase {
         assertEquals(beforeCount + 1, afterCount);
     }
 
+    public void testQueryAllMadridActivities() {
+        ContentResolver cr = getContext().getContentResolver();
+
+        Cursor c = cr.query(MadridGuideProvider.MADRIDACTIVITIES_URI, DBConstants.ALL_MADRIDACTIVITY_COLUMNS, null, null, null);
+        assertNotNull(c);
+    }
+
+    public void testInsertAMadridActivity() {
+        final ContentResolver cr = getContext().getContentResolver();
+
+        final Cursor beforeCursor = cr.query(MadridGuideProvider.MADRIDACTIVITIES_URI, DBConstants.ALL_MADRIDACTIVITY_COLUMNS, null, null, null);
+        final int beforeCount = beforeCursor.getCount();
+
+        final MadridActivity madridActivity = new MadridActivity(1, "Little MadridActivity of horrors!");
+        final Uri insertedUri = cr.insert(MadridGuideProvider.MADRIDACTIVITIES_URI, MadridActivityDAO.getContentValues(madridActivity));
+        assertNotNull(insertedUri);
+
+        final Cursor afterCursor = cr.query(MadridGuideProvider.MADRIDACTIVITIES_URI, DBConstants.ALL_MADRIDACTIVITY_COLUMNS, null, null, null);
+        final int afterCount = afterCursor.getCount();
+
+        assertEquals(beforeCount + 1, afterCount);
+    }
 
 }

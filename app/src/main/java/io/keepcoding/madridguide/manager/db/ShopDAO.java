@@ -116,8 +116,8 @@ public class ShopDAO implements DAOPersistable<Shop> {
     }
 
     @Override
-    public void deleteAll() {
-        db.delete(TABLE_SHOP, null, null);
+    public int deleteAll() {
+        return db.delete(TABLE_SHOP, null, null);
     }
 
     @Nullable

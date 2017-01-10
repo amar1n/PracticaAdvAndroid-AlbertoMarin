@@ -11,7 +11,7 @@ import io.keepcoding.madridguide.model.Shops;
 import io.keepcoding.madridguide.util.MainThread;
 
 
-public class GetAllShopsInteractorFakeImpl implements IGetAllShopsInteractor {
+public class GetAllShopsInteractorFakeImpl implements IGetAllItemsInteractor<Shops> {
     @NonNull
     private List<Shop> getShops() {
         List<Shop> data = new ArrayList<>();
@@ -21,7 +21,7 @@ public class GetAllShopsInteractorFakeImpl implements IGetAllShopsInteractor {
     }
 
     @Override
-    public void execute(Context context, final GetAllShopsInteractorResponse response) {
+    public void execute(Context context, final GetAllItemsInteractorResponse<Shops> response) {
         List<Shop> data = getShops();
 
         final Shops sut = Shops.build(data);

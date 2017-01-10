@@ -3,21 +3,21 @@ package io.keepcoding.madridguide.interactors;
 import android.content.Context;
 import android.os.Looper;
 
-import io.keepcoding.madridguide.manager.db.ShopDAO;
-import io.keepcoding.madridguide.model.Shop;
-import io.keepcoding.madridguide.model.Shops;
+import io.keepcoding.madridguide.manager.db.MadridActivityDAO;
+import io.keepcoding.madridguide.model.MadridActivities;
+import io.keepcoding.madridguide.model.MadridActivity;
 
-public class CacheAllShopsInteractor {
+public class CacheAllMadridActivitiesInteractor {
 
-    public void execute(final Context context, final Shops shops, final CacheAllItemsInteractorResponse response) {
+    public void execute(final Context context, final MadridActivities madridActivities, final CacheAllItemsInteractorResponse response) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                ShopDAO dao = new ShopDAO(context);
+                MadridActivityDAO dao = new MadridActivityDAO(context);
 
                 boolean success = true;
-                for (Shop shop: shops.allItems()) {
-                    success = dao.insert(shop) > 0;
+                for (MadridActivity madridActivity: madridActivities.allItems()) {
+                    success = dao.insert(madridActivity) > 0;
                     if (!success) {
                         break;
                     }
@@ -28,6 +28,7 @@ public class CacheAllShopsInteractor {
                 if (response != null) {
                     response.response(success);
                 }
+
             }
         }).start();
     }

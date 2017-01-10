@@ -2,9 +2,9 @@ package io.keepcoding.madridguide;
 
 import android.test.AndroidTestCase;
 
+import io.keepcoding.madridguide.interactors.GetAllItemsInteractorResponse;
 import io.keepcoding.madridguide.interactors.GetAllShopsInteractorFakeImpl;
-import io.keepcoding.madridguide.interactors.GetAllShopsInteractorResponse;
-import io.keepcoding.madridguide.interactors.IGetAllShopsInteractor;
+import io.keepcoding.madridguide.interactors.IGetAllItemsInteractor;
 import io.keepcoding.madridguide.model.Shop;
 import io.keepcoding.madridguide.model.Shops;
 
@@ -12,9 +12,9 @@ import io.keepcoding.madridguide.model.Shops;
 public class GetAllShopsInteractorTests extends AndroidTestCase {
 
     public void testCanCreateInteractor() {
-        IGetAllShopsInteractor getAllShopsInteractor = new GetAllShopsInteractorFakeImpl();
+        IGetAllItemsInteractor<Shops> getAllShopsInteractor = new GetAllShopsInteractorFakeImpl();
 
-        getAllShopsInteractor.execute(getContext(), new GetAllShopsInteractorResponse() {
+        getAllShopsInteractor.execute(getContext(), new GetAllItemsInteractorResponse<Shops>() {
             @Override
             public void response(Shops shops) {
                 assertNotNull(shops);

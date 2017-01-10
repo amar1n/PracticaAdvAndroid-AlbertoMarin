@@ -86,7 +86,7 @@ public class MadridActivityDAO implements DAOPersistable<MadridActivity> {
     }
 
     public static @NonNull
-    MadridActivity getActivityFromContentValues(final @NonNull ContentValues contentValues) {
+    MadridActivity getMadridActivityFromContentValues(final @NonNull ContentValues contentValues) {
         final MadridActivity madridActivity = new MadridActivity(1, "");
 
         //activity.setId(contentValues.getAsInteger(KEY_SHOP_ID));
@@ -117,8 +117,8 @@ public class MadridActivityDAO implements DAOPersistable<MadridActivity> {
     }
 
     @Override
-    public void deleteAll() {
-        db.delete(TABLE_MADRIDACTIVITY, null, null);
+    public int deleteAll() {
+        return db.delete(TABLE_MADRIDACTIVITY, null, null);
     }
 
     @Nullable

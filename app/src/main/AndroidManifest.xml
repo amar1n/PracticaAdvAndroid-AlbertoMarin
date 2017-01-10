@@ -25,6 +25,8 @@
         android:required="true"/>
 
     <!-- Google Maps END -->
+
+
     <application
         android:name=".MadridGuideApp"
         android:allowBackup="true"

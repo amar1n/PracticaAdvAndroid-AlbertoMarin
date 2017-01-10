@@ -19,18 +19,18 @@ import java.util.List;
 import io.keepcoding.madridguide.R;
 
 public class NetworkManager {
-    public interface GetShopsListener {
-        public void getShopEntitiesSuccess(List<ShopEntity> result);
-        public void getShopEntitiesDidFail();
+    public interface GetEntitiesListener<T> {
+        void getEntitiesSuccess(List<T> result);
+        void getEntitiesDidFail();
     }
 
     WeakReference<Context> context;
 
     public NetworkManager(Context context) {
-        this.context = new WeakReference<Context>(context);
+        this.context = new WeakReference<>(context);
     }
 
-    public void getShopsFromServer(final GetShopsListener listener) {
+    public void getShopsFromServer(final GetEntitiesListener<ShopEntity> listener) {
         RequestQueue queue = Volley.newRequestQueue(context.get());
         String url = context.get().getString(R.string.shops_url);
 
@@ -40,9 +40,9 @@ public class NetworkManager {
                     @Override
                     public void onResponse(String response) {
                         Log.d("JSON", response);
-                        List<ShopEntity> shopResponse = parseResponse(response);
+                        List<ShopEntity> shopResponse = parseShopsResponse(response);
                         if (listener != null) {
-                            listener.getShopEntitiesSuccess(shopResponse);
+                            listener.getEntitiesSuccess(shopResponse);
                         }
                     }
                 },
@@ -50,7 +50,7 @@ public class NetworkManager {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         if (listener != null) {
-                            listener.getShopEntitiesDidFail();
+                            listener.getEntitiesDidFail();
                         }
                     }
                 }
@@ -58,7 +58,35 @@ public class NetworkManager {
         queue.add(request);
     }
 
-    private List<ShopEntity> parseResponse(String response) {
+    public void getMadridActivitiesFromServer(final GetEntitiesListener<MadridActivityEntity> listener) {
+        RequestQueue queue = Volley.newRequestQueue(context.get());
+        String url = context.get().getString(R.string.madridactivities_url);
+
+        StringRequest request = new StringRequest(
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("JSON", response);
+                        List<MadridActivityEntity> madridActivityResponse = parseMadridActivitiesResponse(response);
+                        if (listener != null) {
+                            listener.getEntitiesSuccess(madridActivityResponse);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (listener != null) {
+                            listener.getEntitiesDidFail();
+                        }
+                    }
+                }
+        );
+        queue.add(request);
+    }
+
+    private List<ShopEntity> parseShopsResponse(String response) {
         List<ShopEntity> result = null;
         try {
             Reader reader = new StringReader(response);
@@ -73,4 +101,18 @@ public class NetworkManager {
         return result;
     }
 
+    private List<MadridActivityEntity> parseMadridActivitiesResponse(String response) {
+        List<MadridActivityEntity> result = null;
+        try {
+            Reader reader = new StringReader(response);
+            Gson gson = new GsonBuilder().create();
+
+            MadridActivityResponse madridActivityResponse = gson.fromJson(reader, MadridActivityResponse.class);
+            result = madridActivityResponse.result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }

@@ -10,12 +10,12 @@ import io.keepcoding.madridguide.model.Shop;
 import io.keepcoding.madridguide.model.Shops;
 import io.keepcoding.madridguide.model.mappers.ShopEntityShopMapper;
 
-public class GetAllShopsInteractor implements IGetAllShopsInteractor {
-    public void execute(final Context context, final GetAllShopsInteractorResponse response) {
+public class GetAllShopsInteractor implements IGetAllItemsInteractor<Shops> {
+    public void execute(final Context context, final GetAllItemsInteractorResponse<Shops> response) {
         NetworkManager networkManager = new NetworkManager(context);
-        networkManager.getShopsFromServer(new NetworkManager.GetShopsListener() {
+        networkManager.getShopsFromServer(new NetworkManager.GetEntitiesListener<ShopEntity>() {
             @Override
-            public void getShopEntitiesSuccess(List<ShopEntity> result) {
+            public void getEntitiesSuccess(List<ShopEntity> result) {
                 List<Shop> shops = new ShopEntityShopMapper().map(result);
                 if (response != null) {
                     response.response(Shops.build(shops));
@@ -23,7 +23,7 @@ public class GetAllShopsInteractor implements IGetAllShopsInteractor {
             }
 
             @Override
-            public void getShopEntitiesDidFail() {
+            public void getEntitiesDidFail() {
                 if (response != null) {
                     response.response(null);
                 }
