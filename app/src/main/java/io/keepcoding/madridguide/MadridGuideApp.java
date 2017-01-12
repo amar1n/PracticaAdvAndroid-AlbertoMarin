@@ -32,6 +32,7 @@ public class MadridGuideApp extends Application {
 
         MadridGuideApp.appContext = new WeakReference<>(getApplicationContext());
 
+        // Esto puede ir a MainActivity para controlar la barra de carga
         new GetAllShopsInteractor().execute(getApplicationContext(),
                 new GetAllItemsInteractorResponse<Shops>() {
                     @Override
