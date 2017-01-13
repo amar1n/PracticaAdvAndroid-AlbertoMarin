@@ -1,10 +1,14 @@
 package io.keepcoding.madridguide.interactors;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+
+import org.joda.time.DateTime;
 
 import io.keepcoding.madridguide.manager.db.ShopDAO;
 import io.keepcoding.madridguide.model.Shop;
 import io.keepcoding.madridguide.model.Shops;
+import io.keepcoding.madridguide.util.Constants;
 import io.keepcoding.madridguide.util.MainThread;
 
 public class CacheAllShopsInteractor {
@@ -21,6 +25,13 @@ public class CacheAllShopsInteractor {
                     if (!bFlag) {
                         break;
                     }
+                }
+
+                if (bFlag) {
+                    final SharedPreferences preferences = context.getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString(Constants.LAST_SHOPS_DOWNLOAD_KEY, DateTime.now().toString());
+                    editor.commit();
                 }
 
                 final boolean success = bFlag;

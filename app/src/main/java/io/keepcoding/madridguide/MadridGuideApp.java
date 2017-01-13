@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.squareup.picasso.Picasso;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import java.lang.ref.WeakReference;
 
 public class MadridGuideApp extends Application {
@@ -26,6 +28,7 @@ public class MadridGuideApp extends Application {
         Picasso.with(getApplicationContext()).setIndicatorsEnabled(true);
         Picasso.with(getApplicationContext()).setLoggingEnabled(true);
 
+        JodaTimeAndroid.init(this);
     }
 
     @Override

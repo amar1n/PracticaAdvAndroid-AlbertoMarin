@@ -1,5 +1,7 @@
 package io.keepcoding.madridguide.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,6 +24,7 @@ import io.keepcoding.madridguide.navigator.Navigator;
 public class MainActivity extends AppCompatActivity {
 
     protected int counter = 0;
+    protected boolean bError = false;
 
     protected ViewSwitcher viewSwitcher;
 
@@ -51,34 +54,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupShopsButton() {
-        this.openShopsButton.setOnClickListener(new View.OnClickListener() {
+        openShopsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigator.navigateFromMainActivityToShopsActivity(MainActivity.this);
             }
         });
+        openShopsButton.setEnabled(false);
 
-        this.openMadridActivitiesButton.setOnClickListener(new View.OnClickListener() {
+        openMadridActivitiesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigator.navigateFromMainActivityToMadridActivitiesActivity(MainActivity.this);
             }
         });
+        openMadridActivitiesButton.setEnabled(false);
     }
 
     private void setupData() {
-        // Esto puede ir a MainActivity para controlar la barra de carga
         new GetAllShopsInteractor().execute(getApplicationContext(),
                 new GetAllItemsInteractorResponse<Shops>() {
                     @Override
                     public void response(Shops shops) {
-                        new CacheAllShopsInteractor().execute(getApplicationContext(),
-                                shops, new CacheAllItemsInteractorResponse() {
-                                    @Override
-                                    public void response(boolean success) {
-                                        updateUI();
-                                    }
-                                });
+                        if (shops == null) {
+                            bError = true;
+                            updateUI();
+                        } else {
+                            new CacheAllShopsInteractor().execute(getApplicationContext(),
+                                    shops, new CacheAllItemsInteractorResponse() {
+                                        @Override
+                                        public void response(boolean success) {
+                                            bError = !success;
+                                            updateUI();
+                                        }
+                                    });
+                        }
                     }
                 }
         );
@@ -87,13 +97,19 @@ public class MainActivity extends AppCompatActivity {
                 new GetAllItemsInteractorResponse<MadridActivities>() {
                     @Override
                     public void response(MadridActivities madridActivities) {
-                        new CacheAllMadridActivitiesInteractor().execute(getApplicationContext(),
-                                madridActivities, new CacheAllItemsInteractorResponse() {
-                                    @Override
-                                    public void response(boolean success) {
-                                        updateUI();
-                                    }
-                                });
+                        if (madridActivities == null) {
+                            bError = true;
+                            updateUI();
+                        } else {
+                            new CacheAllMadridActivitiesInteractor().execute(getApplicationContext(),
+                                    madridActivities, new CacheAllItemsInteractorResponse() {
+                                        @Override
+                                        public void response(boolean success) {
+                                            bError = !success;
+                                            updateUI();
+                                        }
+                                    });
+                        }
                     }
                 }
         );
@@ -103,6 +119,25 @@ public class MainActivity extends AppCompatActivity {
         counter += 1;
         if (counter % 2 == 0) {
             viewSwitcher.setDisplayedChild(1);
+
+            if (bError) {
+                // Ha habido algún error, se lo notificamos al usuario
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+                alertDialog.setTitle("Jorror!!!");
+                alertDialog.setMessage("se tiró 3 alguna vaina!!!");
+                alertDialog.setPositiveButton("inténtalo again!!!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        viewSwitcher.setDisplayedChild(0);
+                        counter = 0;
+                        setupData();
+                    }
+                });
+                alertDialog.show();
+            } else {
+                openMadridActivitiesButton.setEnabled(true);
+                openShopsButton.setEnabled(true);
+            }
         }
     }
 }

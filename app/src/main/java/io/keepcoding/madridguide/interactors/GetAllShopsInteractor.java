@@ -9,9 +9,25 @@ import io.keepcoding.madridguide.manager.net.ShopEntity;
 import io.keepcoding.madridguide.model.Shop;
 import io.keepcoding.madridguide.model.Shops;
 import io.keepcoding.madridguide.model.mappers.ShopEntityShopMapper;
+import io.keepcoding.madridguide.util.Constants;
+import io.keepcoding.madridguide.util.MadridGuideUtils;
 
 public class GetAllShopsInteractor implements IGetAllItemsInteractor<Shops> {
     public void execute(final Context context, final GetAllItemsInteractorResponse<Shops> response) {
+
+        MadridGuideUtils mgu = new MadridGuideUtils();
+        boolean doTheDownload = mgu.doDownload(context, Constants.LAST_SHOPS_DOWNLOAD_KEY);
+        if (!doTheDownload) {
+            GetAllShopsFromLocalCacheInteractor interactor = new GetAllShopsFromLocalCacheInteractor();
+            interactor.execute(context, new GetAllShopsFromLocalCacheInteractor.OnGetAllShopsFromLocalCacheInteractorCompletion() {
+                @Override
+                public void completion(Shops shops) {
+                    response.response(shops);
+                }
+            });
+            return;
+        }
+
         NetworkManager networkManager = new NetworkManager(context);
         networkManager.getShopsFromServer(new NetworkManager.GetEntitiesListener<ShopEntity>() {
             @Override
