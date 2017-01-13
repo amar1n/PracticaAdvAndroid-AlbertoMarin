@@ -12,6 +12,14 @@
               tools:context="io.keepcoding.madridguide.activities.MadridActivitiesActivity">
 
     <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
+
+    <fragment
         android:id="@+id/activity_madridactivities_fragment_madridactivities"
         android:name="io.keepcoding.madridguide.fragments.MadridActivitiesFragment"
         android:layout_width="match_parent"
