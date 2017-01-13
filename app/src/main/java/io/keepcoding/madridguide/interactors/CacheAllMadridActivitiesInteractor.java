@@ -13,6 +13,7 @@ import io.keepcoding.madridguide.manager.db.MadridActivityDAO;
 import io.keepcoding.madridguide.model.MadridActivities;
 import io.keepcoding.madridguide.model.MadridActivity;
 import io.keepcoding.madridguide.util.Constants;
+import io.keepcoding.madridguide.util.MadridGuideUtils;
 import io.keepcoding.madridguide.util.MainThread;
 
 public class CacheAllMadridActivitiesInteractor {
@@ -36,11 +37,12 @@ public class CacheAllMadridActivitiesInteractor {
                         Picasso.with(context)
                                 .load(madridActivity.getLogoImgUrl())
                                 .get();
+
+                        Picasso.with(context)
+                                .load(MadridGuideUtils.getMapUrl(madridActivity.getLatitude(), madridActivity.getLongitude()))
+                                .get();
                     } catch (IOException e) {
-                        bFlag = false;
-                    }
-                    if (!bFlag) {
-                        break;
+                        e.printStackTrace();
                     }
                 }
 

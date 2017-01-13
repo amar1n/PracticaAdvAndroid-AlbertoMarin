@@ -23,4 +23,9 @@ public class MadridGuideUtils {
 
         return result;
     }
+
+    public static String getMapUrl(final float latitude, final float longitude) {
+        return String.format("http://maps.googleapis.com/maps/api/staticmap?center=%s,%s&zoom=17&size=320x220&scale=2&markers=%%7Ccolor:0x9C7B14%%7C%s,%s",
+                Float.toString(latitude), Float.toString(longitude), Float.toString(latitude), Float.toString(longitude));
+    }
 }

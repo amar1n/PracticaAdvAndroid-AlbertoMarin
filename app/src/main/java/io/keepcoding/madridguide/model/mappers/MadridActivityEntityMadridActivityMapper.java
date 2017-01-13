@@ -20,6 +20,8 @@ public class MadridActivityEntityMadridActivityMapper {
                 madridActivity.setDescription(entity.getDescriptionEn());
             }
             madridActivity.setLogoImgUrl(entity.getLogoImg());
+            madridActivity.setLatitude(entity.getLatitude());
+            madridActivity.setLongitude(entity.getLongitude());
 
             // ...
 

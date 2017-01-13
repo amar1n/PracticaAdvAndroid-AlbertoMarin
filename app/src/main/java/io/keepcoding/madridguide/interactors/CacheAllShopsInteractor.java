@@ -36,11 +36,12 @@ public class CacheAllShopsInteractor {
                         Picasso.with(context)
                                 .load(shop.getLogoImgUrl())
                                 .get();
+
+                        Picasso.with(context)
+                                .load(String.format("http://maps.googleapis.com/maps/api/staticmap?center=%s,%s&zoom=17&size=320x220&scale=2&markers=%%7Ccolor:0x9C7B14%%7C%s,%s", Float.toString(shop.getLatitude()), Float.toString(shop.getLongitude()), Float.toString(shop.getLatitude()), Float.toString(shop.getLongitude())))
+                                .get();
                     } catch (IOException e) {
-                        bFlag = false;
-                    }
-                    if (!bFlag) {
-                        break;
+                        e.printStackTrace();
                     }
                 }
 
