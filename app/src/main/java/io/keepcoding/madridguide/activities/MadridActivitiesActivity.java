@@ -54,7 +54,7 @@ public class MadridActivitiesActivity extends AppCompatActivity implements OnMap
             mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
             // check if map is created successfully or not
             if (mapFragment == null) {
-                Toast.makeText(getApplicationContext(), "Sorry! unable to create maps", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Sorry! unable to create maps", Toast.LENGTH_LONG).show();
             } else {
                 mapFragment.getMapAsync(this);
             }

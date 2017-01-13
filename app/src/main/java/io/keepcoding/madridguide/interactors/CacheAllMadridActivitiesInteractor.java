@@ -3,7 +3,11 @@ package io.keepcoding.madridguide.interactors;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.squareup.picasso.Picasso;
+
 import org.joda.time.DateTime;
+
+import java.io.IOException;
 
 import io.keepcoding.madridguide.manager.db.MadridActivityDAO;
 import io.keepcoding.madridguide.model.MadridActivities;
@@ -20,8 +24,21 @@ public class CacheAllMadridActivitiesInteractor {
                 MadridActivityDAO dao = new MadridActivityDAO(context);
 
                 boolean bFlag = true;
-                for (MadridActivity madridActivity: madridActivities.allItems()) {
+                for (final MadridActivity madridActivity: madridActivities.allItems()) {
                     bFlag = dao.insert(madridActivity) > 0;
+                    if (!bFlag) {
+                        break;
+                    }
+
+                    // Esto es mejorable, ya que hacemos el cacheo de imagenes de manera secuencial.
+                    // Se debería remplazar por un mecanismo que hiciera el cacheo de las imagenes en paralelo
+                    try {
+                        Picasso.with(context)
+                                .load(madridActivity.getLogoImgUrl())
+                                .get();
+                    } catch (IOException e) {
+                        bFlag = false;
+                    }
                     if (!bFlag) {
                         break;
                     }
