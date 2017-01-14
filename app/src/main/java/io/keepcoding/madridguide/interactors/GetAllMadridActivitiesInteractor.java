@@ -15,14 +15,13 @@ import io.keepcoding.madridguide.util.MadridGuideUtils;
 public class GetAllMadridActivitiesInteractor implements IGetAllItemsInteractor<MadridActivities> {
     public void execute(final Context context, final GetAllItemsInteractorResponse<MadridActivities> response) {
 
-        MadridGuideUtils mgu = new MadridGuideUtils();
-        boolean doTheDownload = mgu.doDownload(context, Constants.LAST_MADRIDACTIVITIES_DOWNLOAD_KEY);
+        boolean doTheDownload = MadridGuideUtils.doDownload(context, Constants.LAST_MADRIDACTIVITIES_DOWNLOAD_KEY);
         if (!doTheDownload) {
             GetAllMadridActivitiesFromLocalCacheInteractor interactor = new GetAllMadridActivitiesFromLocalCacheInteractor();
             interactor.execute(context, new GetAllMadridActivitiesFromLocalCacheInteractor.OnGetAllMadridActivitiesFromLocalCacheInteractorCompletion() {
                 @Override
                 public void completion(MadridActivities madridActivities) {
-                    response.response(madridActivities);
+                    response.response(madridActivities, false);
                 }
             });
             return;
@@ -34,14 +33,14 @@ public class GetAllMadridActivitiesInteractor implements IGetAllItemsInteractor<
             public void getEntitiesSuccess(List<MadridActivityEntity> result) {
                 List<MadridActivity> madridActivities = new MadridActivityEntityMadridActivityMapper().map(result);
                 if (response != null) {
-                    response.response(MadridActivities.build(madridActivities));
+                    response.response(MadridActivities.build(madridActivities), true);
                 }
             }
 
             @Override
             public void getEntitiesDidFail() {
                 if (response != null) {
-                    response.response(null);
+                    response.response(null, false);
                 }
             }
         });

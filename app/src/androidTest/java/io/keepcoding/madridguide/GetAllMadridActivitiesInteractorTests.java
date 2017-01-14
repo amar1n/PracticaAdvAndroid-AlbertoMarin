@@ -16,7 +16,7 @@ public class GetAllMadridActivitiesInteractorTests extends AndroidTestCase {
 
         getAllShopsInteractor.execute(getContext(), new GetAllItemsInteractorResponse<MadridActivities>() {
             @Override
-            public void response(MadridActivities madridActivities) {
+            public void response(MadridActivities madridActivities, boolean newItems) {
                 assertNotNull(madridActivities);
                 assertTrue(madridActivities.size() > 0);
 

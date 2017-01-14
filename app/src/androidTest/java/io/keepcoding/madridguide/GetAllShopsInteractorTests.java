@@ -16,7 +16,7 @@ public class GetAllShopsInteractorTests extends AndroidTestCase {
 
         getAllShopsInteractor.execute(getContext(), new GetAllItemsInteractorResponse<Shops>() {
             @Override
-            public void response(Shops shops) {
+            public void response(Shops shops, boolean newItems) {
                 assertNotNull(shops);
                 assertTrue(shops.size() > 0);
 

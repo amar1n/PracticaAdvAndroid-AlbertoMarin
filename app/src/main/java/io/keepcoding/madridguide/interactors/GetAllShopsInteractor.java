@@ -15,14 +15,13 @@ import io.keepcoding.madridguide.util.MadridGuideUtils;
 public class GetAllShopsInteractor implements IGetAllItemsInteractor<Shops> {
     public void execute(final Context context, final GetAllItemsInteractorResponse<Shops> response) {
 
-        MadridGuideUtils mgu = new MadridGuideUtils();
-        boolean doTheDownload = mgu.doDownload(context, Constants.LAST_SHOPS_DOWNLOAD_KEY);
+        boolean doTheDownload = MadridGuideUtils.doDownload(context, Constants.LAST_SHOPS_DOWNLOAD_KEY);
         if (!doTheDownload) {
             GetAllShopsFromLocalCacheInteractor interactor = new GetAllShopsFromLocalCacheInteractor();
             interactor.execute(context, new GetAllShopsFromLocalCacheInteractor.OnGetAllShopsFromLocalCacheInteractorCompletion() {
                 @Override
                 public void completion(Shops shops) {
-                    response.response(shops);
+                    response.response(shops, false);
                 }
             });
             return;
@@ -34,14 +33,14 @@ public class GetAllShopsInteractor implements IGetAllItemsInteractor<Shops> {
             public void getEntitiesSuccess(List<ShopEntity> result) {
                 List<Shop> shops = new ShopEntityShopMapper().map(result);
                 if (response != null) {
-                    response.response(Shops.build(shops));
+                    response.response(Shops.build(shops), true);
                 }
             }
 
             @Override
             public void getEntitiesDidFail() {
                 if (response != null) {
-                    response.response(null);
+                    response.response(null, false);
                 }
             }
         });

@@ -75,19 +75,23 @@ public class MainActivity extends AppCompatActivity {
         new GetAllShopsInteractor().execute(getApplicationContext(),
                 new GetAllItemsInteractorResponse<Shops>() {
                     @Override
-                    public void response(Shops shops) {
+                    public void response(Shops shops, boolean newItems) {
                         if (shops == null) {
                             bError = true;
                             updateUI();
                         } else {
-                            new CacheAllShopsInteractor().execute(getApplicationContext(),
-                                    shops, new CacheAllItemsInteractorResponse() {
-                                        @Override
-                                        public void response(boolean success) {
-                                            bError = !success;
-                                            updateUI();
-                                        }
-                                    });
+                            if (newItems) {
+                                new CacheAllShopsInteractor().execute(getApplicationContext(),
+                                        shops, new CacheAllItemsInteractorResponse() {
+                                            @Override
+                                            public void response(boolean success) {
+                                                bError = !success;
+                                                updateUI();
+                                            }
+                                        });
+                            } else {
+                                updateUI();
+                            }
                         }
                     }
                 }
@@ -96,19 +100,23 @@ public class MainActivity extends AppCompatActivity {
         new GetAllMadridActivitiesInteractor().execute(getApplicationContext(),
                 new GetAllItemsInteractorResponse<MadridActivities>() {
                     @Override
-                    public void response(MadridActivities madridActivities) {
+                    public void response(MadridActivities madridActivities, boolean newItems) {
                         if (madridActivities == null) {
                             bError = true;
                             updateUI();
                         } else {
-                            new CacheAllMadridActivitiesInteractor().execute(getApplicationContext(),
-                                    madridActivities, new CacheAllItemsInteractorResponse() {
-                                        @Override
-                                        public void response(boolean success) {
-                                            bError = !success;
-                                            updateUI();
-                                        }
-                                    });
+                            if (newItems) {
+                                new CacheAllMadridActivitiesInteractor().execute(getApplicationContext(),
+                                        madridActivities, new CacheAllItemsInteractorResponse() {
+                                            @Override
+                                            public void response(boolean success) {
+                                                bError = !success;
+                                                updateUI();
+                                            }
+                                        });
+                            } else {
+                                updateUI();
+                            }
                         }
                     }
                 }

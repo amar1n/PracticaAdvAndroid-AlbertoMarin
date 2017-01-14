@@ -36,7 +36,7 @@ public class GetAllShopsInteractorFakeImpl implements IGetAllItemsInteractor<Sho
         MainThread.run(new Runnable() {
             @Override
             public void run() {
-                response.response(sut);
+                response.response(sut, false);
             }
         });
     }

@@ -36,7 +36,7 @@ public class GetAllMadridActivitiesInteractorFakeImpl implements IGetAllItemsInt
         MainThread.run(new Runnable() {
             @Override
             public void run() {
-                response.response(sut);
+                response.response(sut, false);
             }
         });
     }

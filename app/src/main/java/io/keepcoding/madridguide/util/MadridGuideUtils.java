@@ -8,7 +8,7 @@ import org.joda.time.DateTimeZone;
 
 public class MadridGuideUtils {
 
-    public boolean doDownload(final Context context, String donwloadKey) {
+    public static boolean doDownload(final Context context, String donwloadKey) {
         boolean result = true;
 
         final SharedPreferences preferences = context.getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
